@@ -1,0 +1,13 @@
+import { _ as _export_sfc, o as openBlock, c as createElementBlock, a2 as createStaticVNode } from "./chunks/framework.CXM-6NNN.js";
+const __pageData = JSON.parse('{"title":"S3 Storage Integration","description":"","frontmatter":{},"headers":[],"relativePath":"guide/s3-storage.md","filePath":"guide/s3-storage.md","lastUpdated":1789563169000}');
+const _sfc_main = { name: "guide/s3-storage.md" };
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", null, [..._cache[0] || (_cache[0] = [
+    createStaticVNode('<h1 id="s3-storage-integration" tabindex="-1">S3 Storage Integration <a class="header-anchor" href="#s3-storage-integration" aria-label="Permalink to &quot;S3 Storage Integration&quot;">​</a></h1><p>NetFlow allows organizations to connect to an external AWS S3 (or compatible) storage bucket for managing files. When enabled, this overrides the default internal storage for your workspace.</p><h2 id="accessing-s3-storage" tabindex="-1">Accessing S3 Storage <a class="header-anchor" href="#accessing-s3-storage" aria-label="Permalink to &quot;Accessing S3 Storage&quot;">​</a></h2><p>If enabled by a Platform Super Admin (<code>s3Enabled</code>), you can access the S3 Storage dashboard by navigating to <strong>Documents Management System → S3 Storage</strong> in the Org Admin sidebar.</p><h2 id="managing-files" tabindex="-1">Managing Files <a class="header-anchor" href="#managing-files" aria-label="Permalink to &quot;Managing Files&quot;">​</a></h2><p>The S3 Storage dashboard (<code>/s3-storage</code>) provides a full file browser interface directly connected to your configured bucket.</p><ul><li><strong>Browse &amp; Navigate</strong>: Click on folders to navigate through the bucket&#39;s hierarchy.</li><li><strong>Upload</strong>: Upload new files directly into the current folder.</li><li><strong>Delete</strong>: Remove files from the bucket permanently.</li></ul><h2 id="storage-quotas-limits" tabindex="-1">Storage Quotas &amp; Limits <a class="header-anchor" href="#storage-quotas-limits" aria-label="Permalink to &quot;Storage Quotas &amp; Limits&quot;">​</a></h2><p>Files stored in an external S3 bucket do not typically count against your internal NetFlow storage quota. However, your organization is responsible for the S3 bucket costs and AWS storage limits.</p><p>If connection errors occur (e.g., incorrect credentials or bucket policies), the dashboard will display specific S3 connection errors to help you troubleshoot.</p>', 10)
+  ])]);
+}
+const s3Storage = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
+export {
+  __pageData,
+  s3Storage as default
+};

@@ -1,0 +1,21 @@
+status 0 signal null
+--OUT--
+◇ injected env (22) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+
+=== ui_workflows ===
+  PASS  WFB-001  The canvas starts at 100% zoom with no pan applied
+  PASS  WFB-001  Zoom in scales the canvas up and updates the zoom readout
+  PASS  WFB-001  Zoom out returns the canvas to its previous scale
+  PASS  WFB-001  Scrolling over the canvas zooms it
+  PASS  WFB-001  The zoom readout doubles as a reset back to 100%
+  PASS  WFB-001  Dragging empty canvas pans the view by the drag distance
+  PASS  WFB-001  Fit re-frames the canvas around the nodes
+  PASS  WFB-013  Dropping a connection back on its own node creates nothing
+  PASS  WFB-013  The same drag onto a different node does connect
+  PASS  WFB-027  Leaving an untouched builder does not warn
+  PASS  WFB-027  Leaving with unsaved canvas changes warns first
+
+ui_workflows: 11 passed, 0 failed
+__RESULTS__ {"WFB-001":{"status":"Pass","note":""},"WFB-013":{"status":"Pass","note":""},"WFB-027":{"status":"Pass","note":""}}
+
+--ERR--

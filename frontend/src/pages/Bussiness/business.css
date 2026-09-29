@@ -1,0 +1,229 @@
+.nf-landing {
+  /* Marketing surfaces follow the shared theme without recoloring media or navy panels. */
+  --landing-page: #fbfcfc;
+  --landing-surface: #fff;
+  --landing-section: #f3f6f7;
+  --landing-canvas: #f7f9fb;
+  --landing-input: #f8fafc;
+  --landing-ink: #091322;
+  --landing-label: #334155;
+  --landing-body: #475569;
+  --landing-muted: #64748b;
+  --landing-subtle: #94a3b8;
+  --landing-divider: #f1f5f9;
+  --landing-line: #e2e8f0;
+  --landing-line-strong: #cbd5e1;
+  --landing-accent: var(--color-primary);
+  --landing-info-bg: #eef2ff;
+  --landing-info-badge: #e0e7ff;
+  --landing-info-line: #e0e7ff;
+  --landing-info-border: #c7d2fe;
+  --landing-info: #4f46e5;
+  --landing-success-bg: #ecfdf5;
+  --landing-success-border: #a7f3d0;
+  --landing-success: #059669;
+  --landing-success-strong: #047857;
+  --landing-warning-bg: #fffbeb;
+  --landing-warning-border: #fde68a;
+  --landing-warning: #d97706;
+  --landing-warning-bright: #f59e0b;
+  --landing-danger-bg: #fff1f2;
+  --landing-danger: #f43f5e;
+  --landing-violet-bg: #f5f3ff;
+  --landing-violet-border: #ddd6fe;
+  --landing-violet: #7c3aed;
+}
+
+.dark .nf-landing {
+  --landing-page: #161e2a;
+  --landing-surface: #202b3b;
+  --landing-section: #1a2534;
+  --landing-canvas: #172231;
+  --landing-input: #182333;
+  --landing-ink: #f1f5f9;
+  --landing-label: #dbe4ef;
+  --landing-body: #cbd5e1;
+  --landing-muted: #b0bfd0;
+  --landing-subtle: #a3b3c8;
+  --landing-divider: #334155;
+  --landing-line: #3c4b60;
+  --landing-line-strong: #596a81;
+  --landing-accent: var(--color-info-fg);
+  --landing-info-bg: #24384f;
+  --landing-info-badge: #2a3d61;
+  --landing-info-line: #356aa7;
+  --landing-info-border: #526dab;
+  --landing-info: #b8c4ff;
+  --landing-success-bg: #203d2e;
+  --landing-success-border: #337b58;
+  --landing-success: #7cdaad;
+  --landing-success-strong: #8ce6ba;
+  --landing-warning-bg: #4a3b22;
+  --landing-warning-border: #8a6a35;
+  --landing-warning: #f0c77d;
+  --landing-warning-bright: #f0c77d;
+  --landing-danger-bg: #4a282f;
+  --landing-danger: #ffa0ac;
+  --landing-violet-bg: #352b50;
+  --landing-violet-border: #756099;
+  --landing-violet: #c9afff;
+}
+
+.nf-landing :is(button, a, summary):focus-visible {
+  outline: 3px solid var(--landing-accent);
+  outline-offset: 4px;
+}
+
+.nf-landing .nf-landing-inverse-button {
+  background-color: #fff;
+  color: #091322;
+}
+
+.dark .nf-landing .nf-landing-word-mark {
+  background-color: #526d28;
+}
+
+.dark .nf-landing .nf-landing-platform-tab[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 1px var(--landing-accent);
+}
+
+.dark .nf-landing .hero-glow {
+  background:
+    radial-gradient(circle at 16% 26%, rgba(201, 245, 93, .07), transparent 29%),
+    radial-gradient(circle at 86% 16%, rgba(36, 90, 154, .22), transparent 32%);
+}
+
+.dark .nf-landing .flow-port::before,
+.dark .nf-landing .flow-port::after {
+  border-color: var(--landing-surface);
+  box-shadow: 0 0 0 1px var(--landing-line-strong);
+}
+
+.dark .nf-landing details[open] .faq-plus {
+  background: var(--landing-info-bg);
+  color: var(--landing-ink);
+  border-color: var(--landing-accent);
+}
+
+.dark .nf-landing :is(input, textarea)::placeholder {
+  color: var(--landing-subtle);
+  opacity: 1;
+}
+
+.grid-paper {
+  background-image: radial-gradient(rgba(105, 120, 140, .28) .7px, transparent .7px);
+  background-size: 18px 18px;
+}
+
+.grid-dark {
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.hero-glow {
+  background:
+    radial-gradient(circle at 16% 26%, rgba(201,245,93,.18), transparent 29%),
+    radial-gradient(circle at 86% 16%, rgba(36,90,154,.20), transparent 32%);
+}
+
+.workflow-connector {
+  position: absolute;
+  height: 2px;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--color-brand-400), var(--color-primary));
+}
+
+.workflow-connector::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+  transform: rotate(45deg);
+}
+
+.flow-port::before,
+.flow-port::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border: 2px solid white;
+  border-radius: 999px;
+  background: #95a0b2;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 1px #c7d0da;
+}
+
+.flow-port::before { left: -5px; }
+.flow-port::after { right: -5px; }
+.no-left-port::before { display: none; }
+.no-right-port::after { display: none; }
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { scrollbar-width: none; }
+
+details summary::-webkit-details-marker { display: none; }
+details[open] .faq-plus { transform: rotate(45deg); background: #091322; color: white; }
+
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+.chart-wrap canvas, .chart-wrap .recharts-wrapper { width: 100% !important; height: 100% !important; }
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 2.8s ease-in-out infinite;
+}
+
+.animate-float-soft {
+  animation: floatSoft 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* Soft blur page transition */
+.page-exit-active {
+  pointer-events: none;
+  animation: nfPageBlurOut 360ms cubic-bezier(0.4, 0, 1, 1) forwards;
+  will-change: opacity, filter;
+}
+
+@keyframes nfPageBlurOut {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+/* Hide the scrollbar without disabling scrolling */
+html:has(.nf-landing) {
+  scrollbar-width: none;
+}
+
+html:has(.nf-landing)::-webkit-scrollbar {
+  display: none;
+}

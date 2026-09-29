@@ -1,0 +1,98 @@
+{
+  "name": "IntegrationDeadLetter",
+  "collection": "integrationdeadletters",
+  "timestamps": false,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "workflowId": {
+      "kind": "id",
+      "ref": "Workflow"
+    },
+    "executionId": {
+      "kind": "id",
+      "ref": "WorkflowExecution"
+    },
+    "nodeId": {
+      "kind": "string"
+    },
+    "url": {
+      "kind": "string"
+    },
+    "method": {
+      "kind": "string"
+    },
+    "error": {
+      "kind": "string"
+    },
+    "httpStatus": {
+      "kind": "number"
+    },
+    "attempts": {
+      "kind": "number"
+    },
+    "requestBodyPreview": {
+      "kind": "string"
+    },
+    "resolved": {
+      "kind": "boolean",
+      "default": false
+    },
+    "resolvedAt": {
+      "kind": "date"
+    },
+    "resolvedBy": {
+      "kind": "id",
+      "ref": "User"
+    },
+    "createdAt": {
+      "kind": "date",
+      "defaultFactory": "now"
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "workflowId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "executionId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "createdAt": 1
+      },
+      {
+        "expireAfterSeconds": 7776000
+      }
+    ],
+    [
+      {
+        "orgId": 1,
+        "resolved": 1,
+        "createdAt": -1
+      },
+      {}
+    ]
+  ]
+}

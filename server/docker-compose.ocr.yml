@@ -1,0 +1,18 @@
+services:
+  paddleocr:
+    build:
+      context: ./vendor/PaddleOCR
+      dockerfile: ../../ocr/Dockerfile
+      args:
+        PADDLEPADDLE_VERSION: 3.2.0
+    image: netflow-paddleocr:v3.7.0
+    container_name: netflow-paddleocr
+    ports:
+      - 127.0.0.1:8080:8080
+    volumes:
+      - paddleocr-models:/root/.paddlex
+    shm_size: 2gb
+    restart: unless-stopped
+
+volumes:
+  paddleocr-models:

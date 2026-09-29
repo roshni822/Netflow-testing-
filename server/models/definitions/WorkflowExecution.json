@@ -1,0 +1,157 @@
+{
+  "name": "WorkflowExecution",
+  "collection": "workflowexecutions",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "workflowId": {
+      "kind": "id",
+      "ref": "Workflow",
+      "required": true
+    },
+    "formResponseId": {
+      "kind": "id",
+      "ref": "FormResponse"
+    },
+    "triggeredBy": {
+      "kind": "id",
+      "ref": "User",
+      "required": true
+    },
+    "triggeredByExternal.name": {
+      "kind": "string"
+    },
+    "triggeredByExternal.email": {
+      "kind": "string"
+    },
+    "triggeredByExternal.source": {
+      "kind": "string"
+    },
+    "statusToken": {
+      "kind": "string"
+    },
+    "status": {
+      "kind": "string",
+      "enum": [
+        "running",
+        "completed",
+        "failed",
+        "paused",
+        "cancelled"
+      ],
+      "default": "running"
+    },
+    "currentNodeId": {
+      "kind": "string"
+    },
+    "executionLog": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "nodeId": {
+            "kind": "string"
+          },
+          "nodeType": {
+            "kind": "string"
+          },
+          "enteredAt": {
+            "kind": "date",
+            "defaultFactory": "now"
+          },
+          "exitedAt": {
+            "kind": "date"
+          },
+          "status": {
+            "kind": "string",
+            "enum": [
+              "in_progress",
+              "completed",
+              "failed",
+              "skipped"
+            ]
+          },
+          "output": {
+            "kind": "json"
+          },
+          "_id": {
+            "kind": "id",
+            "defaultFactory": "id"
+          }
+        }
+      }
+    },
+    "startedAt": {
+      "kind": "date",
+      "defaultFactory": "now"
+    },
+    "completedAt": {
+      "kind": "date"
+    },
+    "failedAt": {
+      "kind": "date"
+    },
+    "failureReason": {
+      "kind": "string"
+    },
+    "timerResumeAt": {
+      "kind": "date"
+    },
+    "timerNextNodeId": {
+      "kind": "string"
+    },
+    "variables": {
+      "kind": "json",
+      "default": {}
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "statusToken": 1
+      },
+      {
+        "sparse": true,
+        "unique": true
+      }
+    ],
+    [
+      {
+        "timerResumeAt": 1
+      },
+      {}
+    ],
+    [
+      {
+        "orgId": 1,
+        "workflowId": 1,
+        "status": 1,
+        "createdAt": -1
+      },
+      {}
+    ]
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "name": "PdfAutoFillSemanticProfile",
+  "collection": "pdfautofillsemanticprofiles",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization",
+      "required": true
+    },
+    "formId": {
+      "kind": "id",
+      "ref": "Form",
+      "required": true
+    },
+    "documentType": {
+      "kind": "string",
+      "maxlength": 80,
+      "required": true
+    },
+    "sourceAlias": {
+      "kind": "string",
+      "maxlength": 160,
+      "required": true
+    },
+    "fieldId": {
+      "kind": "string",
+      "required": true
+    },
+    "valuePattern": {
+      "kind": "string",
+      "required": true,
+      "enum": [
+        "empty",
+        "boolean",
+        "number",
+        "date",
+        "numeric_identifier",
+        "alphanumeric_identifier",
+        "identifier_list",
+        "text"
+      ]
+    },
+    "positiveStreak": {
+      "kind": "number",
+      "min": 0,
+      "default": 0
+    },
+    "totalConfirmations": {
+      "kind": "number",
+      "min": 0,
+      "default": 0
+    },
+    "correctionCount": {
+      "kind": "number",
+      "min": 0,
+      "default": 0
+    },
+    "dismissalCount": {
+      "kind": "number",
+      "min": 0,
+      "default": 0
+    },
+    "learnedTier": {
+      "kind": "string",
+      "enum": [
+        "none",
+        "medium",
+        "high"
+      ],
+      "default": "none"
+    },
+    "lastFeedbackAt": {
+      "kind": "date",
+      "default": null
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "formId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "documentType": 1
+      },
+      {}
+    ],
+    [
+      {
+        "orgId": 1,
+        "formId": 1,
+        "documentType": 1,
+        "sourceAlias": 1,
+        "fieldId": 1,
+        "valuePattern": 1
+      },
+      {
+        "unique": true,
+        "name": "pdf_autofill_semantic_identity"
+      }
+    ]
+  ]
+}

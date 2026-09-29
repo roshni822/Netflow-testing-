@@ -1,0 +1,117 @@
+{
+  "name": "AuditLog",
+  "collection": "auditlogs",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "action": {
+      "kind": "string",
+      "required": true,
+      "enum": [
+        "form_submitted",
+        "form_deleted",
+        "task_approved",
+        "task_rejected",
+        "task_submitted",
+        "task_escalated",
+        "workflow_started",
+        "workflow_completed",
+        "workflow_failed",
+        "workflow_deleted",
+        "user_invited",
+        "user_updated",
+        "user_deleted",
+        "builder_access_granted",
+        "builder_access_revoked",
+        "role_changed",
+        "request_changes",
+        "approver_inferred",
+        "workflow_cancelled",
+        "webhook_called",
+        "webhook_received",
+        "users_imported",
+        "user_logged_in",
+        "department_created",
+        "department_renamed",
+        "department_deleted",
+        "org_settings_updated",
+        "org_created",
+        "org_updated",
+        "org_suspended",
+        "org_activated",
+        "org_deleted",
+        "org_admin_password_reset",
+        "org_storage_extended",
+        "org_storage_extension_revoked",
+        "org_licence_expired",
+        "org_limit_reached",
+        "platform_broadcast_sent"
+      ]
+    },
+    "performedBy": {
+      "kind": "id",
+      "ref": "User"
+    },
+    "targetEntity": {
+      "kind": "string",
+      "required": true
+    },
+    "department": {
+      "kind": "string"
+    },
+    "ipAddress": {
+      "kind": "string"
+    },
+    "detail": {
+      "kind": "string"
+    },
+    "metadata": {
+      "kind": "json",
+      "default": {}
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "createdAt": -1
+      },
+      {}
+    ],
+    [
+      {
+        "action": 1,
+        "createdAt": -1
+      },
+      {}
+    ],
+    [
+      {
+        "performedBy": 1,
+        "createdAt": -1
+      },
+      {}
+    ]
+  ]
+}

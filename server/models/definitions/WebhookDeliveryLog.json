@@ -1,0 +1,96 @@
+{
+  "name": "WebhookDeliveryLog",
+  "collection": "webhookdeliverylogs",
+  "timestamps": false,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "workflowId": {
+      "kind": "id",
+      "ref": "Workflow"
+    },
+    "executionId": {
+      "kind": "id",
+      "ref": "WorkflowExecution"
+    },
+    "ok": {
+      "kind": "boolean",
+      "default": false
+    },
+    "statusCode": {
+      "kind": "number"
+    },
+    "error": {
+      "kind": "string"
+    },
+    "code": {
+      "kind": "string"
+    },
+    "ip": {
+      "kind": "string"
+    },
+    "payloadKeys": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "string"
+      }
+    },
+    "hasSignature": {
+      "kind": "boolean",
+      "default": false
+    },
+    "idempotencyKey": {
+      "kind": "string"
+    },
+    "replay": {
+      "kind": "boolean",
+      "default": false
+    },
+    "durationMs": {
+      "kind": "number"
+    },
+    "createdAt": {
+      "kind": "date",
+      "defaultFactory": "now"
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "workflowId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "createdAt": 1
+      },
+      {
+        "expireAfterSeconds": 2592000
+      }
+    ],
+    [
+      {
+        "orgId": 1,
+        "createdAt": -1
+      },
+      {}
+    ]
+  ]
+}

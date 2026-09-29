@@ -1,0 +1,363 @@
+{
+  "name": "Organization",
+  "collection": "organizations",
+  "timestamps": true,
+  "fields": {
+    "name": {
+      "kind": "string",
+      "trim": true,
+      "required": true
+    },
+    "subdomain": {
+      "kind": "string",
+      "trim": true,
+      "lowercase": true,
+      "required": true,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+    },
+    "allowedDomains": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "string"
+      }
+    },
+    "departments": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "string"
+      }
+    },
+    "features.externalUsers": {
+      "kind": "boolean",
+      "default": false
+    },
+    "pdfAutoFill.enabled": {
+      "kind": "boolean",
+      "default": true
+    },
+    "pdfAutoFill.languageMode": {
+      "kind": "string",
+      "enum": [
+        "english",
+        "english_hindi",
+        "hindi"
+      ],
+      "default": "english_hindi"
+    },
+    "pdfAutoFill.audiences.authenticated": {
+      "kind": "boolean",
+      "default": true
+    },
+    "pdfAutoFill.audiences.public": {
+      "kind": "boolean",
+      "default": false
+    },
+    "pdfAutoFill.entitlementOverride": {
+      "kind": "boolean",
+      "default": null
+    },
+    "integrations.s3.enabled": {
+      "kind": "boolean",
+      "default": false
+    },
+    "integrations.s3.bucket": {
+      "kind": "string",
+      "default": ""
+    },
+    "integrations.s3.endpoint": {
+      "kind": "string",
+      "default": ""
+    },
+    "integrations.s3.region": {
+      "kind": "string",
+      "default": "auto"
+    },
+    "integrations.s3.accessKeyId": {
+      "kind": "string",
+      "default": ""
+    },
+    "integrations.s3.secretAccessKey": {
+      "kind": "string",
+      "default": ""
+    },
+    "integrations.dmsApiKey": {
+      "kind": "string",
+      "default": ""
+    },
+    "integrations.dmsName": {
+      "kind": "string",
+      "maxlength": 80,
+      "default": ""
+    },
+    "integrations.dmsBaseUrl": {
+      "kind": "string",
+      "default": ""
+    },
+    "integrations.dmsJwt": {
+      "kind": "string",
+      "default": ""
+    },
+    "integrations.dmsEnabled": {
+      "kind": "boolean",
+      "default": false
+    },
+    "integrations.dmsOrgSlug": {
+      "kind": "string",
+      "default": ""
+    },
+    "integrations.departmentDms": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "department": {
+            "kind": "string",
+            "required": true
+          },
+          "apiKey": {
+            "kind": "string",
+            "default": ""
+          },
+          "baseUrl": {
+            "kind": "string",
+            "default": ""
+          },
+          "folder": {
+            "kind": "string",
+            "default": ""
+          },
+          "enabled": {
+            "kind": "boolean",
+            "default": true
+          }
+        }
+      }
+    },
+    "plan": {
+      "kind": "string",
+      "enum": [
+        "trial",
+        "basic",
+        "professional",
+        "enterprise",
+        "custom"
+      ],
+      "default": "custom"
+    },
+    "licence.validFrom": {
+      "kind": "date",
+      "default": null
+    },
+    "licence.validUntil": {
+      "kind": "date",
+      "default": null
+    },
+    "licence.trialEndsAt": {
+      "kind": "date",
+      "default": null
+    },
+    "licence.status": {
+      "kind": "string",
+      "enum": [
+        "active",
+        "expired",
+        "suspended"
+      ],
+      "default": "active"
+    },
+    "licence.notified.d30": {
+      "kind": "boolean",
+      "default": false
+    },
+    "licence.notified.d14": {
+      "kind": "boolean",
+      "default": false
+    },
+    "licence.notified.d7": {
+      "kind": "boolean",
+      "default": false
+    },
+    "licence.notified.d1": {
+      "kind": "boolean",
+      "default": false
+    },
+    "licence.notified.expired": {
+      "kind": "boolean",
+      "default": false
+    },
+    "billingEmail": {
+      "kind": "string",
+      "trim": true,
+      "lowercase": true,
+      "default": ""
+    },
+    "billingAnchorDay": {
+      "kind": "number",
+      "min": 1,
+      "max": 31,
+      "default": 1
+    },
+    "limits.maxUsers": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxBuilders": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxForms": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxWorkflows": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxSubmissionsPerPeriod": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxStorageMb": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxFiles": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.gracePercent": {
+      "kind": "number",
+      "min": 0,
+      "max": 50,
+      "default": 0
+    },
+    "usage.storageBytes": {
+      "kind": "number",
+      "default": 0
+    },
+    "usage.fileCount": {
+      "kind": "number",
+      "default": 0
+    },
+    "usage.bufferBytesUsed": {
+      "kind": "number",
+      "default": 0
+    },
+    "usage.submissions.periodStart": {
+      "kind": "date",
+      "default": null
+    },
+    "usage.submissions.periodEnd": {
+      "kind": "date",
+      "default": null
+    },
+    "usage.submissions.count": {
+      "kind": "number",
+      "default": 0
+    },
+    "usage.notified.sub80": {
+      "kind": "boolean",
+      "default": false
+    },
+    "usage.notified.sub90": {
+      "kind": "boolean",
+      "default": false
+    },
+    "usage.notified.sub100": {
+      "kind": "boolean",
+      "default": false
+    },
+    "usage.notified.stor80": {
+      "kind": "boolean",
+      "default": false
+    },
+    "usage.notified.stor90": {
+      "kind": "boolean",
+      "default": false
+    },
+    "usage.notified.stor95": {
+      "kind": "boolean",
+      "default": false
+    },
+    "usage.notified.stor100": {
+      "kind": "boolean",
+      "default": false
+    },
+    "usage.notified.buffer": {
+      "kind": "boolean",
+      "default": false
+    },
+    "storageExtension.extraMb": {
+      "kind": "number",
+      "default": 0
+    },
+    "storageExtension.expiresAt": {
+      "kind": "date",
+      "default": null
+    },
+    "storageExtension.grantedBy": {
+      "kind": "id",
+      "ref": "User",
+      "default": null
+    },
+    "storageExtension.reason": {
+      "kind": "string",
+      "default": ""
+    },
+    "status": {
+      "kind": "string",
+      "enum": [
+        "active",
+        "suspended"
+      ],
+      "default": "active"
+    },
+    "isDefault": {
+      "kind": "boolean",
+      "default": false
+    },
+    "adminUserId": {
+      "kind": "id",
+      "ref": "User",
+      "default": null
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "subdomain": 1
+      },
+      {
+        "unique": true
+      }
+    ],
+    [
+      {
+        "licence.validUntil": 1
+      },
+      {}
+    ],
+    [
+      {
+        "licence.trialEndsAt": 1
+      },
+      {}
+    ]
+  ]
+}

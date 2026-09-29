@@ -1,0 +1,62 @@
+{
+  "name": "WebhookIdempotency",
+  "collection": "webhookidempotencies",
+  "timestamps": false,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "workflowId": {
+      "kind": "id",
+      "ref": "Workflow",
+      "required": true
+    },
+    "key": {
+      "kind": "string",
+      "required": true
+    },
+    "executionId": {
+      "kind": "id",
+      "ref": "WorkflowExecution",
+      "required": true
+    },
+    "createdAt": {
+      "kind": "date",
+      "defaultFactory": "now"
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "orgId": 1,
+        "workflowId": 1,
+        "key": 1
+      },
+      {
+        "unique": true
+      }
+    ],
+    [
+      {
+        "createdAt": 1
+      },
+      {
+        "expireAfterSeconds": 604800
+      }
+    ]
+  ]
+}

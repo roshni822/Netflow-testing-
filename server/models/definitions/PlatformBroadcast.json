@@ -1,0 +1,66 @@
+{
+  "name": "PlatformBroadcast",
+  "collection": "platformbroadcasts",
+  "timestamps": true,
+  "fields": {
+    "message": {
+      "kind": "string",
+      "trim": true,
+      "maxlength": 500,
+      "required": true
+    },
+    "severity": {
+      "kind": "string",
+      "enum": [
+        "info",
+        "warning",
+        "critical"
+      ],
+      "default": "info"
+    },
+    "expiresAt": {
+      "kind": "date",
+      "required": true
+    },
+    "createdBy": {
+      "kind": "id",
+      "ref": "User",
+      "required": true
+    },
+    "supersededAt": {
+      "kind": "date",
+      "default": null
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "expiresAt": 1
+      },
+      {
+        "expireAfterSeconds": 0
+      }
+    ],
+    [
+      {
+        "supersededAt": 1,
+        "expiresAt": 1,
+        "createdAt": -1
+      },
+      {}
+    ]
+  ]
+}

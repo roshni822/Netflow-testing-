@@ -1,0 +1,202 @@
+{
+  "name": "User",
+  "collection": "users",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "name": {
+      "kind": "string",
+      "trim": true,
+      "required": true
+    },
+    "email": {
+      "kind": "string",
+      "trim": true,
+      "lowercase": true,
+      "required": true
+    },
+    "password": {
+      "kind": "string",
+      "minlength": 6,
+      "required": true
+    },
+    "mustChangePassword": {
+      "kind": "boolean",
+      "default": false
+    },
+    "needsProductTour": {
+      "kind": "boolean",
+      "default": false
+    },
+    "role": {
+      "kind": "id",
+      "ref": "Role"
+    },
+    "department": {
+      "kind": "string",
+      "trim": true,
+      "required": true
+    },
+    "isActive": {
+      "kind": "boolean",
+      "default": true
+    },
+    "tokenVersion": {
+      "kind": "number",
+      "default": 0
+    },
+    "activeSessions": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "string"
+      }
+    },
+    "canBuild": {
+      "kind": "boolean",
+      "default": false
+    },
+    "countsTowardSeats": {
+      "kind": "boolean",
+      "default": true
+    },
+    "isProtected": {
+      "kind": "boolean",
+      "default": false
+    },
+    "avatar": {
+      "kind": "string"
+    },
+    "managerId": {
+      "kind": "id",
+      "ref": "User"
+    },
+    "hrId": {
+      "kind": "id",
+      "ref": "User"
+    },
+    "lastLogin": {
+      "kind": "date"
+    },
+    "resetPasswordToken": {
+      "kind": "string",
+      "hidden": true,
+      "default": null
+    },
+    "resetPasswordExpires": {
+      "kind": "date",
+      "hidden": true,
+      "default": null
+    },
+    "failedLoginAttempts": {
+      "kind": "number",
+      "hidden": true,
+      "default": 0
+    },
+    "lockUntil": {
+      "kind": "date",
+      "hidden": true,
+      "default": null
+    },
+    "mfaEnabled": {
+      "kind": "boolean",
+      "default": false
+    },
+    "mfaSecret": {
+      "kind": "string",
+      "hidden": true,
+      "default": null
+    },
+    "mfaBackupCodes": {
+      "kind": "array",
+      "hidden": true,
+      "items": {
+        "kind": "string"
+      }
+    },
+    "outOfOffice.enabled": {
+      "kind": "boolean",
+      "default": false
+    },
+    "outOfOffice.from": {
+      "kind": "date",
+      "default": null
+    },
+    "outOfOffice.until": {
+      "kind": "date",
+      "default": null
+    },
+    "outOfOffice.note": {
+      "kind": "string"
+    },
+    "outOfOffice.delegateId": {
+      "kind": "id",
+      "ref": "User"
+    },
+    "notificationPrefs.assignment.inApp": {
+      "kind": "boolean",
+      "default": true
+    },
+    "notificationPrefs.assignment.email": {
+      "kind": "boolean",
+      "default": true
+    },
+    "notificationPrefs.approval.inApp": {
+      "kind": "boolean",
+      "default": true
+    },
+    "notificationPrefs.approval.email": {
+      "kind": "boolean",
+      "default": true
+    },
+    "notificationPrefs.rejection.inApp": {
+      "kind": "boolean",
+      "default": true
+    },
+    "notificationPrefs.rejection.email": {
+      "kind": "boolean",
+      "default": true
+    },
+    "notificationPrefs.escalation.inApp": {
+      "kind": "boolean",
+      "default": true
+    },
+    "notificationPrefs.escalation.email": {
+      "kind": "boolean",
+      "default": true
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "orgId": 1,
+        "email": 1
+      },
+      {
+        "unique": true
+      }
+    ]
+  ]
+}
