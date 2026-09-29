@@ -1,0 +1,115 @@
+{
+  "name": "FormResponse",
+  "collection": "formresponses",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "formId": {
+      "kind": "id",
+      "ref": "Form",
+      "required": true
+    },
+    "submittedBy": {
+      "kind": "id",
+      "ref": "User",
+      "default": null
+    },
+    "submittedByExternal.name": {
+      "kind": "string"
+    },
+    "submittedByExternal.email": {
+      "kind": "string"
+    },
+    "source": {
+      "kind": "string",
+      "enum": [
+        "internal",
+        "public"
+      ],
+      "default": "internal"
+    },
+    "formData": {
+      "kind": "json",
+      "required": true
+    },
+    "status": {
+      "kind": "string",
+      "enum": [
+        "submitted",
+        "under_review",
+        "approved",
+        "rejected"
+      ],
+      "default": "submitted"
+    },
+    "attachments": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "kind": "string",
+            "enum": [
+              "form_upload",
+              "auto_fill_source"
+            ],
+            "default": "form_upload"
+          },
+          "filename": {
+            "kind": "string"
+          },
+          "path": {
+            "kind": "string"
+          },
+          "mimetype": {
+            "kind": "string"
+          },
+          "size": {
+            "kind": "number"
+          },
+          "dmsDocId": {
+            "kind": "string",
+            "default": null
+          },
+          "s3Key": {
+            "kind": "string",
+            "default": null
+          },
+          "provisionalId": {
+            "kind": "string",
+            "default": null
+          },
+          "_id": {
+            "kind": "id",
+            "defaultFactory": "id"
+          }
+        }
+      }
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ]
+  ]
+}

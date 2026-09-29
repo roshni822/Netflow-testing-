@@ -1,0 +1,395 @@
+{
+  "name": "DocumentExtractionJob",
+  "collection": "documentextractionjobs",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization",
+      "required": true
+    },
+    "formId": {
+      "kind": "id",
+      "ref": "Form",
+      "required": true
+    },
+    "requesterId": {
+      "kind": "id",
+      "ref": "User",
+      "default": null
+    },
+    "audience": {
+      "kind": "string",
+      "required": true,
+      "enum": [
+        "authenticated",
+        "public"
+      ]
+    },
+    "languageMode": {
+      "kind": "string",
+      "enum": [
+        "english",
+        "english_hindi",
+        "hindi"
+      ],
+      "default": "english_hindi"
+    },
+    "accessTokenHash": {
+      "kind": "string",
+      "hidden": true,
+      "default": null
+    },
+    "sourceFile.filename": {
+      "kind": "string",
+      "required": true
+    },
+    "sourceFile.mimetype": {
+      "kind": "string",
+      "default": "application/pdf"
+    },
+    "sourceFile.size": {
+      "kind": "number",
+      "required": true
+    },
+    "sourceFile.storage": {
+      "kind": "string",
+      "required": true,
+      "enum": [
+        "local",
+        "dms",
+        "s3"
+      ]
+    },
+    "sourceFile.path": {
+      "kind": "string",
+      "default": null
+    },
+    "sourceFile.storedFilename": {
+      "kind": "string",
+      "default": null
+    },
+    "sourceFile.dmsDocId": {
+      "kind": "string",
+      "default": null
+    },
+    "sourceFile.s3Key": {
+      "kind": "string",
+      "default": null
+    },
+    "status": {
+      "kind": "string",
+      "enum": [
+        "queued",
+        "security_scan",
+        "inspecting",
+        "extracting_text",
+        "ocr_processing",
+        "mapping_fields",
+        "validating",
+        "ready",
+        "failed",
+        "cancelled"
+      ],
+      "default": "queued"
+    },
+    "stage": {
+      "kind": "string",
+      "default": "Queued for processing"
+    },
+    "progress": {
+      "kind": "number",
+      "min": 0,
+      "max": 100,
+      "default": 0
+    },
+    "attempts": {
+      "kind": "number",
+      "default": 0
+    },
+    "claimedAt": {
+      "kind": "date",
+      "default": null
+    },
+    "pageCount": {
+      "kind": "number",
+      "default": 0
+    },
+    "pageMeta": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "json"
+      }
+    },
+    "lines": {
+      "kind": "array",
+      "hidden": true,
+      "default": [],
+      "items": {
+        "kind": "json"
+      }
+    },
+    "templateFingerprint": {
+      "kind": "string",
+      "default": null
+    },
+    "documentType": {
+      "kind": "string",
+      "maxlength": 80,
+      "default": "document"
+    },
+    "criticStatus": {
+      "kind": "string",
+      "enum": [
+        "validated",
+        "unavailable",
+        "fallback"
+      ],
+      "default": "fallback"
+    },
+    "suggestions": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "fieldId": {
+            "kind": "string",
+            "required": true
+          },
+          "value": {
+            "kind": "json"
+          },
+          "baseConfidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": 0
+          },
+          "confidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": 0
+          },
+          "tier": {
+            "kind": "string",
+            "required": true,
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "generatorConfidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": 0
+          },
+          "criticConfidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": 0
+          },
+          "criticApproved": {
+            "kind": "boolean",
+            "default": false
+          },
+          "criticStatus": {
+            "kind": "string",
+            "enum": [
+              "validated",
+              "unavailable",
+              "fallback"
+            ],
+            "default": "fallback"
+          },
+          "sourceLabel": {
+            "kind": "string",
+            "maxlength": 160,
+            "default": ""
+          },
+          "decisionReason": {
+            "kind": "string",
+            "maxlength": 300,
+            "default": ""
+          },
+          "learnedTier": {
+            "kind": "string",
+            "enum": [
+              "none",
+              "medium",
+              "high"
+            ],
+            "default": "none"
+          },
+          "learningKey": {
+            "kind": "string",
+            "default": null
+          },
+          "valuePattern": {
+            "kind": "string",
+            "enum": [
+              "empty",
+              "boolean",
+              "number",
+              "date",
+              "numeric_identifier",
+              "alphanumeric_identifier",
+              "identifier_list",
+              "text"
+            ],
+            "default": "text"
+          },
+          "valid": {
+            "kind": "boolean",
+            "default": false
+          },
+          "validationMessage": {
+            "kind": "string",
+            "default": null
+          },
+          "sourceRegions": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "object",
+              "fields": {
+                "lineId": {
+                  "kind": "string",
+                  "required": true
+                },
+                "page": {
+                  "kind": "number",
+                  "required": true
+                },
+                "x": {
+                  "kind": "number",
+                  "required": true
+                },
+                "y": {
+                  "kind": "number",
+                  "required": true
+                },
+                "width": {
+                  "kind": "number",
+                  "required": true
+                },
+                "height": {
+                  "kind": "number",
+                  "required": true
+                },
+                "text": {
+                  "kind": "string",
+                  "default": ""
+                },
+                "confidence": {
+                  "kind": "number",
+                  "default": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "summary.high": {
+      "kind": "number",
+      "default": 0
+    },
+    "summary.medium": {
+      "kind": "number",
+      "default": 0
+    },
+    "summary.low": {
+      "kind": "number",
+      "default": 0
+    },
+    "errorCode": {
+      "kind": "string",
+      "default": null
+    },
+    "errorDetail": {
+      "kind": "string",
+      "hidden": true,
+      "default": null
+    },
+    "consumedResponseId": {
+      "kind": "id",
+      "ref": "FormResponse",
+      "default": null
+    },
+    "consumedAt": {
+      "kind": "date",
+      "default": null
+    },
+    "feedbackProcessedAt": {
+      "kind": "date",
+      "default": null
+    },
+    "feedbackResponseId": {
+      "kind": "id",
+      "ref": "FormResponse",
+      "default": null
+    },
+    "expiresAt": {
+      "kind": "date",
+      "required": true
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "formId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "requesterId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "status": 1
+      },
+      {}
+    ],
+    [
+      {
+        "expiresAt": 1
+      },
+      {}
+    ],
+    [
+      {
+        "status": 1,
+        "createdAt": 1
+      },
+      {}
+    ]
+  ]
+}

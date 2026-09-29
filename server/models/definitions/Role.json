@@ -1,0 +1,65 @@
+{
+  "name": "Role",
+  "collection": "roles",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "name": {
+      "kind": "string",
+      "trim": true,
+      "required": true
+    },
+    "nameKey": {
+      "kind": "string",
+      "trim": true
+    },
+    "description": {
+      "kind": "string"
+    },
+    "permissions": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "string"
+      }
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "orgId": 1,
+        "nameKey": 1
+      },
+      {
+        "unique": true,
+        "partialFilterExpression": {
+          "orgId": {
+            "$type": "objectId"
+          }
+        }
+      }
+    ]
+  ]
+}

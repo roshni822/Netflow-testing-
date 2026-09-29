@@ -1,0 +1,85 @@
+'use strict'
+const assert=require('node:assert/strict')
+async function operationsChecks ({call,expect,owner,fixture,platformToken,platformId}) {
+  const post=(url,body)=>call('/platform'+url,platformToken,body)
+  const request=(url,body,method)=>call('/platform'+url,platformToken,body,{},method)
+  expect(await post('/plans',{key:'operations-fixture',label:'Operations fixture',limits:{maxUsers:-1}}),400,'Negative plan limit rejected')
+  expect(await post('/plans',{key:'operations-fixture',label:'Operations fixture',limits:{maxUsers:8},features:{pdfAutoFill:false}}),201,'Create plan')
+  expect(await request('/plans/operations-fixture',{label:'Updated fixture',limits:{maxUsers:9}},'PUT'),200,'Update plan')
+  expect(await request('/plans/custom',null,'DELETE'),400,'Custom plan protected')
+  expect(await request('/plans/basic',null,'DELETE'),409,'Assigned plan protected')
+  expect(await request('/orgs/'+fixture.orgId,{plan:'operations-fixture',licence:{validUntil:'2099-12-31'}},'PUT'),200,'Assign dynamic database plan')
+  expect(await request('/plans/operations-fixture',null,'DELETE'),409,'Dynamic assigned plan protected')
+  expect(await request('/orgs/'+fixture.orgId,{plan:'basic',licence:{validUntil:'2099-12-31'}},'PUT'),200,'Restore fixture plan')
+  expect(await request('/plans/operations-fixture',null,'DELETE'),200,'Unused plan removable')
+  const result=await post('/admins',{name:'Operations fixture',email:'operations-admin@qa.test'})
+  expect(result,201,'Create platform-only administrator')
+  const admin=result.body.admin
+  assert.ok(admin.tempPassword)
+  const row=(await owner.query('SELECT account_scope,org_id FROM system.user_directory WHERE user_id=$1',[admin._id])).rows[0]
+  assert.deepEqual(row,{account_scope:'platform',org_id:null})
+  const hash=(await owner.query('SELECT password FROM platform.admin_auth WHERE owner_id=$1',[admin._id])).rows[0].password
+  assert.ok(await require('bcryptjs').compare(admin.tempPassword,hash),'Password hashed exactly once')
+  expect(await post('/admins',{name:'Duplicate',email:'operations-admin@qa.test'}),409,'Duplicate admin email rejected')
+  expect(await post('/admins/'+platformId+'/deactivate',{}),409,'Protected self cannot be disabled')
+  expect(await call('/auth/login',null,{email:admin.email,password:admin.tempPassword}),200,'New platform account signs in')
+  assert.ok((await owner.query('SELECT count(*)::int n FROM platform.admin_sessions WHERE owner_id=$1',[admin._id])).rows[0].n>0)
+  expect(await post('/admins/'+admin._id+'/deactivate',{}),200,'Deactivate additional administrator')
+  assert.equal((await owner.query('SELECT count(*)::int n FROM platform.admin_sessions WHERE owner_id=$1',[admin._id])).rows[0].n,0)
+  expect(await call('/auth/login',null,{email:admin.email,password:admin.tempPassword}),401,'Deactivated admin cannot log in')
+  expect(await post('/admins/'+admin._id+'/activate',{}),200,'Reactivate administrator')
+  const reset=await post('/admins/'+admin._id+'/reset-password',{})
+  expect(reset,200,'Reset administrator credential')
+  const newHash=(await owner.query('SELECT password FROM platform.admin_auth WHERE owner_id=$1',[admin._id])).rows[0].password
+  assert.ok(await require('bcryptjs').compare(reset.body.admin.tempPassword,newHash))
+  assert.equal(await require('bcryptjs').compare(admin.tempPassword,newHash),false)
+  const logged=await call('/auth/login',null,{email:fixture.email,password:fixture.password,subdomain:fixture.workspace})
+  expect(logged,200,'Tenant login for audience checks')
+  const tenantToken=logged.body.token
+  const storage=await call('/platform/orgs/'+fixture.orgId+'/storage',platformToken)
+  expect(storage,200,'Organization storage configuration')
+  assert.equal(storage.body.orgId,fixture.orgId)
+  assert.equal(JSON.stringify(storage.body).includes('secretAccessKey'),false)
+  expect(await call('/platform/orgs/'+fixture.orgId+'/storage',tenantToken),403,'Tenant cannot browse platform storage')
+  const connections=require('../../database/fresh/documentConnections')
+  const {withSystemAccess}=require('../../database/context'),{withAccount}=require('../../database/fresh/routing')
+  const bindingOrg={_id:fixture.orgId,integrations:{dmsBaseUrl:'https://fixture.example.test',departmentDms:[{department:'Finance',baseUrl:'https://finance.example.test',enabled:true}]}}
+  await withSystemAccess('authentication',()=>withAccount({account_scope:'tenant',org_id:fixture.orgId},async()=>{
+    await connections.register('trusted-fixture',bindingOrg,'IT')
+    await connections.register('trusted-fixture',bindingOrg,'IT')
+    assert.equal(await connections.resolve('trusted-fixture',bindingOrg),'IT')
+    await assert.rejects(connections.register('trusted-fixture',bindingOrg,'Finance'),e=>e.code==='DMS_DOCUMENT_CONNECTION_AMBIGUOUS')
+    const changed={...bindingOrg,integrations:{...bindingOrg.integrations,dmsBaseUrl:'https://changed.example.test'}}
+    await assert.rejects(connections.resolve('trusted-fixture',changed),e=>e.code==='DMS_CONNECTION_CHANGED')
+    await assert.rejects(connections.resolve('unbound-fixture',bindingOrg),e=>e.code==='DMS_DOCUMENT_ROUTE_REQUIRED')
+  }))
+  await owner.query("DELETE FROM system.resource_routes WHERE purpose='document_connection' AND token_digest=$1",[connections.routeDigest(fixture.orgId,'trusted-fixture')])
+  const expiresAt=new Date(Date.now()+3600000).toISOString()
+  const all=await post('/broadcast',{message:'All isolated organizations',expiresAt})
+  expect(all,201,'Global announcement')
+  const targeted=await post('/broadcast',{message:'Selected isolated organization',severity:'warning',expiresAt,orgIds:[fixture.orgId]})
+  expect(targeted,201,'Targeted announcement')
+  assert.equal((await call('/broadcasts/active',tenantToken)).body.broadcast.message,'Selected isolated organization')
+  assert.equal((await call('/broadcasts/active',fixture.otherToken)).body.broadcast.message,'All isolated organizations')
+  expect(await call('/platform/broadcast',tenantToken,{message:'Unauthorized',expiresAt}),403,'Tenant cannot announce')
+  expect(await post('/broadcast',{message:'Invalid target',expiresAt,orgIds:['f'.repeat(24)]}),409,'Unknown announcement target rejected')
+  const base='/orgs/'+fixture.orgId
+  expect(await post(base+'/archive',{retentionDays:30,reason:'Isolated rehearsal'}),409,'Active organization cannot archive')
+  expect(await post(base+'/suspend',{}),200,'Suspend before archive')
+  expect(await post(base+'/archive',{retentionDays:30,reason:'Isolated rehearsal'}),200,'Archive retains schema and data')
+  assert.ok((await owner.query("SELECT to_regclass('tenant_http_provisioning.users') present")).rows[0].present)
+  expect(await call('/forms',tenantToken),403,'Archived tenant login blocked')
+  expect(await post(base+'/activate',{}),409,'Cannot accidentally activate archived tenant')
+  expect(await post(base+'/restore-archive',{}),200,'Restore archive remains suspended')
+  expect(await post(base+'/activate',{}),200,'Explicit reactivation after restore')
+  assert.equal((await owner.query('SELECT count(*)::int n FROM system.tenant_lifecycle WHERE org_id=$1',[fixture.orgId])).rows[0].n,0)
+  // Mandatory audit failure must roll back a plan mutation.
+  await owner.query("CREATE FUNCTION public.reject_phase6_audit() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'Isolated audit failure'; END; $$")
+  await owner.query("CREATE TRIGGER isolated_operations_audit BEFORE INSERT ON platform.audit_logs FOR EACH ROW WHEN(NEW.action='plan_created') EXECUTE FUNCTION public.reject_phase6_audit()")
+  try {
+    expect(await post('/plans',{key:'audit-rollback',label:'Must roll back'}),500,'Audit failure aborts plan creation')
+    assert.equal((await owner.query("SELECT count(*)::int n FROM platform.plans WHERE key='audit-rollback'")).rows[0].n,0)
+  } finally {await owner.query('DROP TRIGGER isolated_operations_audit ON platform.audit_logs');await owner.query('DROP FUNCTION public.reject_phase6_audit()')}
+  console.log('PASS: plan/admin lifecycle, password hash and protection, scoped announcements, archive/restore and mandatory atomic audit')
+}
+module.exports={operationsChecks}

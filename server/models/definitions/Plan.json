@@ -1,0 +1,82 @@
+{
+  "name": "Plan",
+  "collection": "plans",
+  "timestamps": true,
+  "fields": {
+    "key": {
+      "kind": "string",
+      "trim": true,
+      "lowercase": true,
+      "required": true,
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "label": {
+      "kind": "string",
+      "trim": true,
+      "required": true
+    },
+    "trialDays": {
+      "kind": "number",
+      "default": null
+    },
+    "limits.maxUsers": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxBuilders": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxForms": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxWorkflows": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxSubmissionsPerPeriod": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxStorageMb": {
+      "kind": "number",
+      "default": 0
+    },
+    "limits.maxFiles": {
+      "kind": "number",
+      "default": 0
+    },
+    "features.pdfAutoFill": {
+      "kind": "boolean",
+      "default": true
+    },
+    "isCustom": {
+      "kind": "boolean",
+      "default": false
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "key": 1
+      },
+      {
+        "unique": true
+      }
+    ]
+  ]
+}

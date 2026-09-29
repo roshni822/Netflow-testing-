@@ -1,0 +1,1270 @@
+{
+  "LIC-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-020": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-021": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-022": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-023": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-024": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-025": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-026": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-030": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-031": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-040": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-041": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-042": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-043": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LIC-044": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-014": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICP-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-014": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-016": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-017": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-018": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-019": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-020": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-021": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-022": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-023": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-024": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-025": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-026": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-027": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-028": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-029": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICQ-030": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-014": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-016": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-017": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-018": {
+    "status": "Pass",
+    "note": ""
+  },
+  "LICU-019": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-014": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PERM-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-014": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-023": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-016": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-017": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-018": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-019": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-020": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-021": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-022": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-024": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-025": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-026": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-027": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ADM-028": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PRF-004": {
+    "status": "N/A",
+    "note": "No avatar upload exists in the UI — the \"avatars\" are generated initials. User.avatar is stored but never set by any screen."
+  },
+  "PRF-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PRF-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PRF-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PRF-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PRF-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PRF-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PRF-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PRF-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PRF-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-023": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-014": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-016": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-017": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-018": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-019": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-020": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-021": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-022": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TSK-024": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-024": {
+    "status": "Pending",
+    "note": "External: Slack webhook post (needs a live Slack URL)"
+  },
+  "WFB-027": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-026": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-014": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-016": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-017": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-018": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-030": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-019": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-020": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-021": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-022": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-023": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-025": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-028": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-031": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-029": {
+    "status": "Pass",
+    "note": ""
+  },
+  "WFB-032": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-012": {
+    "status": "Pending",
+    "note": "Frontend: email look/content in inbox (visual)"
+  },
+  "NTF-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "NTF-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-014": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-016": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-017": {
+    "status": "Pass",
+    "note": ""
+  },
+  "ANA-018": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-014": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-023": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-024": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-007": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-016": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-017": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-018": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-019": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-020": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-021": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-022": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-025": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-026": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-027": {
+    "status": "Pass",
+    "note": ""
+  },
+  "PLAT-028": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-006": {
+    "status": "Pending",
+    "note": "Frontend: app behaviour when server is down (visual)"
+  },
+  "EDG-007": {
+    "status": "Pending",
+    "note": "Frontend: UX on throttled/slow network (visual)"
+  },
+  "EDG-008": {
+    "status": "Pending",
+    "note": "Frontend: request timeout / retry UX (visual)"
+  },
+  "EDG-010": {
+    "status": "Pending",
+    "note": "Frontend: two-tab concurrent user edit (last-write UX)"
+  },
+  "EDG-014": {
+    "status": "Pending",
+    "note": "Uploads are served as static files by design; access policy is manual"
+  },
+  "EDG-018": {
+    "status": "Pending",
+    "note": "Frontend: recovery from corrupted localStorage (visual)"
+  },
+  "EDG-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-013": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-015": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-016": {
+    "status": "Pass",
+    "note": ""
+  },
+  "EDG-017": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-001": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-002": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-003": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-004": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-005": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-006": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-007": {
+    "status": "Pending",
+    "note": "Multi-instance Redis rate-limit share requires REDIS_URL in CI"
+  },
+  "HOOK-008": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-009": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-010": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-011": {
+    "status": "Pass",
+    "note": ""
+  },
+  "HOOK-012": {
+    "status": "Pass",
+    "note": ""
+  },
+  "TEN-001": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-002": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-003": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-004": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-005": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-006": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-007": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-008": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-009": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-010": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-011": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "TEN-016": {
+    "status": "Pass",
+    "note": "Verified by the tenant-isolation suite (isolation.test.js)."
+  },
+  "SUB-005": {
+    "status": "Pass",
+    "note": "Verified by the subdomain/org-scoped login suite (_verifyStep9.js)."
+  },
+  "SUB-006": {
+    "status": "Pass",
+    "note": "Verified by the subdomain/org-scoped login suite (_verifyStep9.js)."
+  },
+  "SUB-007": {
+    "status": "Pass",
+    "note": "Verified by the subdomain/org-scoped login suite (_verifyStep9.js)."
+  },
+  "SUB-008": {
+    "status": "Pass",
+    "note": "Verified by the subdomain/org-scoped login suite (_verifyStep9.js)."
+  },
+  "SUB-009": {
+    "status": "Pass",
+    "note": "Verified by the subdomain/org-scoped login suite (_verifyStep9.js)."
+  },
+  "SUB-010": {
+    "status": "Pass",
+    "note": "Verified by the subdomain/org-scoped login suite (_verifyStep9.js)."
+  },
+  "SUB-011": {
+    "status": "Pass",
+    "note": "Verified by the subdomain/org-scoped login suite (_verifyStep9.js)."
+  },
+  "TEN-012": {
+    "status": "Pass",
+    "note": "Verified by the subdomain/org-scoped login suite (_verifyStep9.js)."
+  },
+  "TEN-013": {
+    "status": "Pass",
+    "note": "Verified by the subdomain/org-scoped login suite (_verifyStep9.js)."
+  },
+  "OADM-001": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-002": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-003": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-005": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-006": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-007": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-008": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-009": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-010": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-011": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  },
+  "OADM-015": {
+    "status": "Pass",
+    "note": "Verified by the org-admin provisioning suite (_verifyOrgAdmin.js)."
+  }
+}

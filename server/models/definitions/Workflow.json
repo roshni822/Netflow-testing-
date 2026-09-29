@@ -1,0 +1,473 @@
+{
+  "name": "Workflow",
+  "collection": "workflows",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "title": {
+      "kind": "string",
+      "required": true
+    },
+    "description": {
+      "kind": "string"
+    },
+    "tags": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "string"
+      }
+    },
+    "nodes": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "id": {
+            "kind": "string",
+            "required": true
+          },
+          "type": {
+            "kind": "string",
+            "required": true,
+            "enum": [
+              "start",
+              "approval",
+              "multiApproval",
+              "condition",
+              "api",
+              "notification",
+              "timer",
+              "assignment",
+              "document",
+              "submit",
+              "review",
+              "end"
+            ]
+          },
+          "label": {
+            "kind": "string"
+          },
+          "config.approverId": {
+            "kind": "id",
+            "ref": "User"
+          },
+          "config.approverRole": {
+            "kind": "string"
+          },
+          "config.approvalType": {
+            "kind": "string",
+            "enum": [
+              "sequential",
+              "parallel"
+            ],
+            "default": "sequential"
+          },
+          "config.approverIds": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "id",
+              "ref": "User"
+            }
+          },
+          "config.requiredApprovals": {
+            "kind": "number",
+            "default": 1
+          },
+          "config.condition": {
+            "kind": "string"
+          },
+          "config.conditionField": {
+            "kind": "string"
+          },
+          "config.conditionOperator": {
+            "kind": "string",
+            "enum": [
+              "eq",
+              "gt",
+              "lt",
+              "gte",
+              "lte",
+              "contains"
+            ]
+          },
+          "config.conditionValue": {
+            "kind": "string"
+          },
+          "config.truePath": {
+            "kind": "string"
+          },
+          "config.falsePath": {
+            "kind": "string"
+          },
+          "config.forwardPath": {
+            "kind": "string"
+          },
+          "config.changesPath": {
+            "kind": "string"
+          },
+          "config.slaHours": {
+            "kind": "number",
+            "default": 48
+          },
+          "config.escalateTo": {
+            "kind": "id",
+            "ref": "User"
+          },
+          "config.notificationMessage": {
+            "kind": "string"
+          },
+          "config.apiUrl": {
+            "kind": "string"
+          },
+          "config.apiMethod": {
+            "kind": "string",
+            "default": "POST"
+          },
+          "config.apiHeaders": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "object",
+              "fields": {
+                "key": {
+                  "kind": "string"
+                },
+                "value": {
+                  "kind": "string"
+                }
+              }
+            }
+          },
+          "config.apiBody": {
+            "kind": "string"
+          },
+          "config.sendAllData": {
+            "kind": "boolean"
+          },
+          "config.apiAuth.mode": {
+            "kind": "string",
+            "enum": [
+              "none",
+              "bearer",
+              "basic"
+            ],
+            "default": "none"
+          },
+          "config.apiAuth.token": {
+            "kind": "string"
+          },
+          "config.apiAuth.username": {
+            "kind": "string"
+          },
+          "config.apiAuth.password": {
+            "kind": "string"
+          },
+          "config.saveResponseAs": {
+            "kind": "string"
+          },
+          "config.continueOnError": {
+            "kind": "boolean",
+            "default": true
+          },
+          "config.assignTo": {
+            "kind": "id",
+            "ref": "User"
+          },
+          "config.assignToRole": {
+            "kind": "string"
+          },
+          "config.instructions": {
+            "kind": "string"
+          },
+          "config.requireAttachment": {
+            "kind": "boolean",
+            "default": true
+          },
+          "config.formFields": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "string"
+                },
+                "type": {
+                  "kind": "string"
+                },
+                "label": {
+                  "kind": "string"
+                },
+                "required": {
+                  "kind": "boolean",
+                  "default": false
+                },
+                "placeholder": {
+                  "kind": "string"
+                },
+                "options": {
+                  "kind": "array",
+                  "default": [],
+                  "items": {
+                    "kind": "string"
+                  }
+                },
+                "conditionalLogic.enabled": {
+                  "kind": "boolean",
+                  "default": false
+                },
+                "conditionalLogic.dependsOn": {
+                  "kind": "string"
+                },
+                "conditionalLogic.operator": {
+                  "kind": "string",
+                  "enum": [
+                    "eq",
+                    "neq",
+                    "contains",
+                    "nonempty"
+                  ],
+                  "default": "eq"
+                },
+                "conditionalLogic.showWhen": {
+                  "kind": "string"
+                },
+                "validation.minLength": {
+                  "kind": "number"
+                },
+                "validation.maxLength": {
+                  "kind": "number"
+                },
+                "validation.min": {
+                  "kind": "number"
+                },
+                "validation.max": {
+                  "kind": "number"
+                },
+                "validation.pattern": {
+                  "kind": "string"
+                },
+                "validation.patternLabel": {
+                  "kind": "string"
+                }
+              }
+            }
+          },
+          "config.requireSignature": {
+            "kind": "boolean",
+            "default": false
+          },
+          "config.generatePdf": {
+            "kind": "boolean",
+            "default": false
+          },
+          "config.slackWebhookUrl": {
+            "kind": "string"
+          },
+          "nextNode": {
+            "kind": "string"
+          },
+          "position.x": {
+            "kind": "number"
+          },
+          "position.y": {
+            "kind": "number"
+          }
+        }
+      }
+    },
+    "edges": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "id": {
+            "kind": "string"
+          },
+          "source": {
+            "kind": "string"
+          },
+          "target": {
+            "kind": "string"
+          },
+          "label": {
+            "kind": "string"
+          },
+          "_id": {
+            "kind": "id",
+            "defaultFactory": "id"
+          }
+        }
+      }
+    },
+    "status": {
+      "kind": "string",
+      "enum": [
+        "draft",
+        "published",
+        "paused",
+        "archived"
+      ],
+      "default": "draft"
+    },
+    "linkedFormId": {
+      "kind": "id",
+      "ref": "Form"
+    },
+    "linkedFormIds": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "id",
+        "ref": "Form"
+      }
+    },
+    "access.whoCanSubmit": {
+      "kind": "string",
+      "default": "All employees"
+    },
+    "access.departments": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "string"
+      }
+    },
+    "access.allowedInitiators": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "id",
+        "ref": "User"
+      }
+    },
+    "access.visibility": {
+      "kind": "string",
+      "default": "company"
+    },
+    "access.visibleTo": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "id",
+        "ref": "User"
+      }
+    },
+    "triggerOn": {
+      "kind": "string",
+      "default": "Every form submission"
+    },
+    "preventDuplicates": {
+      "kind": "boolean",
+      "default": false
+    },
+    "notifyOnSlaBreach": {
+      "kind": "string",
+      "default": "Always"
+    },
+    "inboundWebhook.enabled": {
+      "kind": "boolean",
+      "default": false
+    },
+    "inboundWebhook.token": {
+      "kind": "string"
+    },
+    "inboundWebhook.secret": {
+      "kind": "string"
+    },
+    "inboundWebhook.requireSignature": {
+      "kind": "boolean",
+      "default": true
+    },
+    "inboundWebhook.callbackUrl": {
+      "kind": "string",
+      "default": ""
+    },
+    "inboundWebhook.expectedFields": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "id": {
+            "kind": "string"
+          },
+          "label": {
+            "kind": "string"
+          },
+          "type": {
+            "kind": "string",
+            "default": "text"
+          },
+          "required": {
+            "kind": "boolean",
+            "default": false
+          },
+          "_id": {
+            "kind": "id",
+            "defaultFactory": "id"
+          }
+        }
+      }
+    },
+    "advanced.allowCancel": {
+      "kind": "boolean",
+      "default": false
+    },
+    "advanced.autoPdf": {
+      "kind": "boolean",
+      "default": false
+    },
+    "department": {
+      "kind": "string"
+    },
+    "createdBy": {
+      "kind": "id",
+      "ref": "User"
+    },
+    "version": {
+      "kind": "number",
+      "default": 1
+    },
+    "previousVersionId": {
+      "kind": "id",
+      "ref": "Workflow"
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "inboundWebhook.token": 1
+      },
+      {
+        "sparse": true
+      }
+    ]
+  ]
+}

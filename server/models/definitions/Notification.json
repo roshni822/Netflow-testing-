@@ -1,0 +1,77 @@
+{
+  "name": "Notification",
+  "collection": "notifications",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "userId": {
+      "kind": "id",
+      "ref": "User",
+      "required": true
+    },
+    "title": {
+      "kind": "string",
+      "required": true
+    },
+    "message": {
+      "kind": "string",
+      "required": true
+    },
+    "type": {
+      "kind": "string",
+      "required": true,
+      "enum": [
+        "approval",
+        "rejection",
+        "escalation",
+        "assignment",
+        "reminder",
+        "system"
+      ]
+    },
+    "isRead": {
+      "kind": "boolean",
+      "default": false
+    },
+    "taskId": {
+      "kind": "id",
+      "ref": "Task"
+    },
+    "triggeredBy": {
+      "kind": "id",
+      "ref": "User"
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "userId": 1,
+        "isRead": 1,
+        "createdAt": -1
+      },
+      {}
+    ]
+  ]
+}

@@ -1,0 +1,123 @@
+'use strict'
+const assert = require('node:assert/strict')
+const crypto = require('node:crypto')
+const jwt = require('jsonwebtoken')
+const speakeasy = require('speakeasy')
+const { withSystemAccess } = require('../../database/context')
+const { withAccount } = require('../../database/fresh/routing')
+const { runWithOrgId } = require('../../tenancy/tenantContext')
+const postgres = require('../../database/postgres')
+const User = require('../../models/User')
+
+async function tenantRoutingChecks ({ call, expect, owner, provisioned, orgBody, platformToken, secret }) {
+  const login = await call('/auth/login', null, { email: orgBody.adminEmail, password: provisioned.admin.tempPassword })
+  expect(login, 200, 'Unique tenant email logs in without a workspace selector')
+  assert.equal(login.body.user.accountScope, 'tenant')
+  assert.equal(login.body.user.orgId, provisioned.org._id)
+  assert.equal(login.body.user.mustChangePassword, true)
+  assert.equal(login.body.user.role.name, 'Admin')
+  const changedPassword = crypto.randomBytes(24).toString('base64url')
+  const changed = await call('/auth/change-password', login.body.token, { newPassword: changedPassword })
+  expect(changed, 200, 'Tenant first-login password change')
+  expect(await call('/auth/me', login.body.token), 401, 'Password change revokes temporary session')
+  const token = changed.body.token
+  expect(await call('/auth/product-tour/complete', token, {}), 200, 'Tenant profile update')
+  const claims = jwt.verify(token, secret)
+  assert.equal(claims.org, provisioned.org._id)
+  expect(await call('/auth/me', token), 200, 'Tenant session')
+  expect(await call('/platform/orgs', token), 403, 'Tenant cannot manage platform')
+  const secondBody = { ...orgBody, name: 'HTTP Other Tenant', subdomain: 'http-other-tenant' }
+  const second = await call('/platform/orgs', platformToken, secondBody, { 'Idempotency-Key': crypto.randomUUID() })
+  expect(second, 201, 'Second isolated workspace')
+  const ambiguous = await call('/auth/login', null, { email: orgBody.adminEmail, password: provisioned.admin.tempPassword })
+  expect(ambiguous, 401, 'Same email does not expose workspace choices')
+  assert.deepEqual(ambiguous.body, { success: false, error: 'Invalid email or password', code: 'INVALID_CREDENTIALS' })
+  const other = await call('/auth/login', null, { email: orgBody.adminEmail, password: second.body.admin.tempPassword, subdomain: secondBody.subdomain })
+  expect(other, 200, 'Same email distinct workspace')
+  const forged = { ...claims, org: second.body.org._id }; delete forged.iat; delete forged.exp
+  expect(await call('/auth/me', jwt.sign(forged, secret, { expiresIn: '10m' })), 401, 'Signed mismatched placement rejected')
+  for (const route of ['/users', '/roles', '/departments', '/organization', '/forms', '/workflows', '/tasks/my-tasks', '/notifications', '/audit-logs', '/analytics/summary', '/analytics/completion-time', '/analytics/sla-breaches', '/analytics/approval-rate', '/analytics/activity', '/analytics/department-kpis', '/analytics/workflow-control-tower', '/team', '/usage']) {
+    expect(await call(route, token), 200, 'Tenant business read ' + route)
+  }
+  const id = provisioned.org._id
+  const scoped = fn => withSystemAccess('authentication', () => withAccount({ account_scope: 'tenant', org_id: id }, fn))
+  await scoped(async () => {
+    assert.equal((await User.find({}).lean()).length, 1)
+    assert.equal(await User.findById(other.body.user._id).lean(), null)
+    await assert.rejects(postgres.transaction(() => runWithOrgId(second.body.org._id, () => postgres.query('SELECT 1'))), e => e.code === 'DATABASE_SCOPE_SWITCH')
+    await User.updateOne({ _id: login.body.user._id }, { $set: { canBuild: true } })
+  })
+  const form = await call('/forms', token, { title: 'Tenant isolation form', department: 'IT', fields: [] })
+  expect(form, 201, 'Tenant form create')
+  const formId = form.body.form._id
+  expect(await call('/forms/' + formId, other.body.token), 404, 'Cross-tenant form blocked')
+  expect(await call('/forms/' + formId + '/publish', token, {}), 200, 'Tenant form publish')
+  expect(await call('/forms/' + formId + '/draft', token, { formData: { note: 'Isolated draft' } }, {}, 'PUT'), 200, 'Tenant draft child data')
+  const workflow = await call('/workflows', token, { title: 'Tenant workflow', department: 'IT', tags: ['verification'], linkedFormIds: [formId], nodes: [
+    { id: 'start', type: 'start', nextNode: 'approval' }, { id: 'approval', type: 'approval', label: 'Isolated approval', nextNode: 'end', config: { approverId: login.body.user._id } }, { id: 'end', type: 'end' }
+  ], edges: [{ id: 'one', source: 'start', target: 'approval' }, { id: 'two', source: 'approval', target: 'end' }] })
+  expect(workflow, 201, 'Tenant workflow create and local form reference')
+  expect(await call('/workflows/' + workflow.body.workflow._id, other.body.token), 404, 'Cross-tenant workflow blocked')
+  expect(await call('/departments', token, { name: 'Routing QA' }), 201, 'Tenant department child write')
+  expect(await call('/organization', token, { name: 'Renamed HTTP Tenant', billingEmail: 'billing@qa.test' }, {}, 'PUT'), 200, 'Tenant shared settings write')
+  assert.ok((await call('/departments', token)).body.departments.some(d => d.name === 'Routing QA'), 'Local departments survive a shared profile edit')
+  assert.equal((await owner.query('SELECT schema_name FROM platform.organizations WHERE id=$1', [id])).rows[0].schema_name, 'tenant_http_provisioning')
+  await scoped(async () => {
+    await assert.rejects(require('../../models/Organization').updateOne({ _id: id }, { $set: { plan: 'enterprise' } }), e => e.code === 'PLATFORM_SETTING_PROTECTED')
+  })
+  expect(await call('/workflows/' + workflow.body.workflow._id + '/publish', token, {}), 200, 'Tenant workflow publish')
+  const submission = await call('/forms/' + formId + '/submit', token, { formData: { note: 'Isolated submission' } })
+  expect(submission, 201, 'Tenant submission starts approval workflow')
+  const task = (await owner.query('SELECT id FROM tenant_http_provisioning.tasks WHERE assigned_to=$1', [login.body.user._id])).rows[0]
+  if (!task) console.log(JSON.stringify({ workflowDiagnostic: true, triggered: submission.body.workflowTriggered,
+    workflows: (await owner.query('SELECT status,nodes,trigger_on FROM tenant_http_provisioning.workflows')).rows,
+    executions: (await owner.query('SELECT status,current_node_id FROM tenant_http_provisioning.workflow_executions')).rows }))
+  assert.ok(task, 'Approval task belongs to the same tenant')
+  expect(await call('/tasks/' + task.id + '/approve', other.body.token, {}), 404, 'Cross-tenant approval blocked')
+  expect(await call('/tasks/' + task.id + '/approve', token, { comment: 'Isolated approval' }), 200, 'Tenant approval and execution continuation')
+  assert.equal((await owner.query('SELECT status FROM tenant_http_provisioning.tasks WHERE id=$1', [task.id])).rows[0].status, 'approved')
+  assert.ok((await owner.query('SELECT count(*)::int n FROM tenant_http_provisioning.audit_logs')).rows[0].n > 0)
+  assert.ok((await owner.query("SELECT count(*)::int n FROM system.outbox WHERE org_id=$1 AND status='pending'", [id])).rows[0].n > 0, 'Business deliveries queue atomically for the worker phase')
+  const roles = await call('/roles', token)
+  const role = roles.body.roles.find(r => r.name === 'Employee')
+  assert.ok((await scoped(() => require('../../models/Organization').findById(id).lean())).departments.includes('Routing QA'), 'Lazy queries execute inside their tenant placement')
+  const member = await call('/users', token, { name: 'Isolated member', email: 'member@qa.test', department: 'Routing QA', roleId: role._id })
+  expect(member, 201, 'Tenant user creation and directory sync')
+  expect(await call('/users/' + member.body.user._id, token, {}, {}, 'DELETE'), 200, 'Tenant account deactivation')
+  assert.equal((await owner.query('SELECT count(*)::int n FROM tenant_http_other_tenant.forms')).rows[0].n, 0)
+  expect(await call('/forms/' + formId + '/public', token, { enabled: true }), 200, 'Public routing is enabled for the tenant')
+  const setup = await call('/auth/mfa/setup', token, {})
+  expect(setup, 200, 'Tenant MFA setup')
+  const code = () => speakeasy.totp({ secret: setup.body.manualKey, encoding: 'base32' })
+  const enabled = await call('/auth/mfa/enable', token, { code: code() })
+  expect(enabled, 200, 'Tenant MFA enable')
+  const challenge = await call('/auth/login', null, { email: orgBody.adminEmail, password: changedPassword, subdomain: orgBody.subdomain })
+  assert.equal(challenge.body.mfaRequired, true)
+  assert.equal(jwt.verify(challenge.body.challenge, secret).org, id)
+  expect(await call('/auth/me', challenge.body.challenge), 401, 'Tenant MFA challenge is not a session')
+  const verified = await call('/auth/mfa/verify', null, { challenge: challenge.body.challenge, code: enabled.body.backupCodes[0] })
+  expect(verified, 200, 'Tenant backup-code login')
+  expect(await call('/auth/mfa/verify', null, { challenge: challenge.body.challenge, code: enabled.body.backupCodes[0] }), 401, 'Tenant backup-code reuse blocked')
+  expect(await call('/auth/mfa/disable', token, { code: code() }), 200, 'Tenant MFA disable')
+  const raw = await scoped(async () => {
+    const user = await User.findById(login.body.user._id)
+    const raw = user.createPasswordResetToken(); await user.save(); return raw
+  })
+  const reset = { token: raw, email: orgBody.adminEmail, password: crypto.randomBytes(24).toString('base64url') }
+  expect(await call('/auth/reset-password/validate?email=' + encodeURIComponent(reset.email) + '&token=' + raw), 200, 'Tenant reset lookup')
+  expect(await call('/auth/reset-password', null, reset), 200, 'Tenant reset routed by digest without workspace')
+  expect(await call('/auth/reset-password', null, reset), 400, 'Tenant reset token consumed once')
+  expect(await call('/auth/me', token), 401, 'Tenant reset revokes prior sessions')
+  expect(await call('/auth/me', other.body.token), 200, 'Other tenant sessions unaffected')
+  await owner.query("UPDATE platform.organizations SET status='suspended' WHERE id=$1", [id])
+  expect(await call('/auth/login', null, { email: reset.email, password: reset.password, subdomain: orgBody.subdomain }), 403, 'Suspension blocks new login')
+  await assert.rejects(scoped(() => User.find({})), e => e.code === 'ORG_SUSPENDED')
+  await owner.query("UPDATE platform.organizations SET status='active' WHERE id=$1", [id])
+  const again = await call('/auth/login', null, { email: reset.email, password: reset.password, subdomain: orgBody.subdomain })
+  expect(again, 200, 'Tenant sign-in after reset')
+  expect(await call('/auth/logout', again.body.token, {}), 200, 'Tenant logout')
+  expect(await call('/auth/me', again.body.token), 401, 'Tenant logout revokes session')
+  console.log('PASS: tenant login, scoped business APIs, isolation, local relationships, MFA, reset, suspension and logout')
+  return { email: reset.email, password: reset.password, workspace: orgBody.subdomain, orgId: id, otherToken: other.body.token }
+}
+module.exports = { tenantRoutingChecks }

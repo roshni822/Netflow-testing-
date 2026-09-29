@@ -1,0 +1,55 @@
+{
+  "name": "FormDraft",
+  "collection": "formdrafts",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "formId": {
+      "kind": "id",
+      "ref": "Form",
+      "required": true
+    },
+    "userId": {
+      "kind": "id",
+      "ref": "User",
+      "required": true
+    },
+    "formData": {
+      "kind": "json",
+      "default": {}
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "formId": 1,
+        "userId": 1
+      },
+      {
+        "unique": true
+      }
+    ]
+  ]
+}

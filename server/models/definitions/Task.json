@@ -1,0 +1,307 @@
+{
+  "name": "Task",
+  "collection": "tasks",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "workflowExecutionId": {
+      "kind": "id",
+      "ref": "WorkflowExecution"
+    },
+    "workflowId": {
+      "kind": "id",
+      "ref": "Workflow"
+    },
+    "assignedTo": {
+      "kind": "id",
+      "ref": "User"
+    },
+    "submittedBy": {
+      "kind": "id",
+      "ref": "User"
+    },
+    "formResponseId": {
+      "kind": "id",
+      "ref": "FormResponse"
+    },
+    "title": {
+      "kind": "string",
+      "required": true
+    },
+    "type": {
+      "kind": "string",
+      "required": true
+    },
+    "actionType": {
+      "kind": "string",
+      "enum": [
+        "approval",
+        "submit",
+        "review"
+      ],
+      "default": "approval"
+    },
+    "status": {
+      "kind": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "escalated",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending"
+    },
+    "dueDate": {
+      "kind": "date"
+    },
+    "currentNode": {
+      "kind": "string"
+    },
+    "instructions": {
+      "kind": "string"
+    },
+    "requireAttachment": {
+      "kind": "boolean",
+      "default": false
+    },
+    "formFields": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "id": {
+            "kind": "string"
+          },
+          "type": {
+            "kind": "string"
+          },
+          "label": {
+            "kind": "string"
+          },
+          "required": {
+            "kind": "boolean",
+            "default": false
+          },
+          "placeholder": {
+            "kind": "string"
+          },
+          "options": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "string"
+            }
+          },
+          "_id": {
+            "kind": "id",
+            "defaultFactory": "id"
+          }
+        }
+      }
+    },
+    "formData": {
+      "kind": "json",
+      "default": {}
+    },
+    "requireSignature": {
+      "kind": "boolean",
+      "default": false
+    },
+    "attachments": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "name": {
+            "kind": "string"
+          },
+          "url": {
+            "kind": "string"
+          },
+          "mime": {
+            "kind": "string"
+          },
+          "size": {
+            "kind": "number"
+          },
+          "dmsDocId": {
+            "kind": "string",
+            "default": null
+          },
+          "provisionalId": {
+            "kind": "string",
+            "default": null
+          },
+          "_id": {
+            "kind": "id",
+            "defaultFactory": "id"
+          }
+        }
+      }
+    },
+    "approvalType": {
+      "kind": "string",
+      "enum": [
+        "sequential",
+        "parallel"
+      ],
+      "default": "sequential"
+    },
+    "requiredApprovals": {
+      "kind": "number",
+      "default": 1
+    },
+    "approvalHistory": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "action": {
+            "kind": "string",
+            "enum": [
+              "submitted",
+              "approved",
+              "rejected",
+              "request_changes",
+              "escalated",
+              "reassigned"
+            ]
+          },
+          "performedBy": {
+            "kind": "id",
+            "ref": "User"
+          },
+          "performedAt": {
+            "kind": "date",
+            "defaultFactory": "now"
+          },
+          "comment": {
+            "kind": "string"
+          },
+          "signature.kind": {
+            "kind": "string",
+            "enum": [
+              "uploaded",
+              "typed",
+              "drawn"
+            ]
+          },
+          "signature.url": {
+            "kind": "string"
+          },
+          "signature.text": {
+            "kind": "string"
+          },
+          "signature.font": {
+            "kind": "string"
+          },
+          "signature.dmsDocId": {
+            "kind": "string",
+            "default": null
+          },
+          "_id": {
+            "kind": "id",
+            "defaultFactory": "id"
+          }
+        }
+      }
+    },
+    "parallelApprovers": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "id",
+        "ref": "User"
+      }
+    },
+    "parallelApprovals": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "userId": {
+            "kind": "id",
+            "ref": "User"
+          },
+          "status": {
+            "kind": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ]
+          },
+          "decidedAt": {
+            "kind": "date"
+          },
+          "_id": {
+            "kind": "id",
+            "defaultFactory": "id"
+          }
+        }
+      }
+    },
+    "escalationLevel": {
+      "kind": "number",
+      "default": 0
+    },
+    "isEscalated": {
+      "kind": "boolean",
+      "default": false
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "assignedTo": 1,
+        "status": 1
+      },
+      {}
+    ],
+    [
+      {
+        "dueDate": 1,
+        "status": 1,
+        "isEscalated": 1
+      },
+      {}
+    ],
+    [
+      {
+        "orgId": 1,
+        "workflowId": 1,
+        "status": 1,
+        "dueDate": 1
+      },
+      {}
+    ]
+  ]
+}

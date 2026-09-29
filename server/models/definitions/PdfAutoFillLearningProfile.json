@@ -1,0 +1,123 @@
+{
+  "name": "PdfAutoFillLearningProfile",
+  "collection": "pdfautofilllearningprofiles",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization",
+      "required": true
+    },
+    "formId": {
+      "kind": "id",
+      "ref": "Form",
+      "required": true
+    },
+    "templateFingerprint": {
+      "kind": "string",
+      "required": true
+    },
+    "fieldId": {
+      "kind": "string",
+      "required": true
+    },
+    "evidenceKey": {
+      "kind": "string",
+      "required": true
+    },
+    "valuePattern": {
+      "kind": "string",
+      "required": true,
+      "enum": [
+        "empty",
+        "boolean",
+        "number",
+        "date",
+        "numeric_identifier",
+        "alphanumeric_identifier",
+        "identifier_list",
+        "text"
+      ]
+    },
+    "positiveStreak": {
+      "kind": "number",
+      "min": 0,
+      "default": 0
+    },
+    "totalConfirmations": {
+      "kind": "number",
+      "min": 0,
+      "default": 0
+    },
+    "correctionCount": {
+      "kind": "number",
+      "min": 0,
+      "default": 0
+    },
+    "dismissalCount": {
+      "kind": "number",
+      "min": 0,
+      "default": 0
+    },
+    "learnedTier": {
+      "kind": "string",
+      "enum": [
+        "none",
+        "medium",
+        "high"
+      ],
+      "default": "none"
+    },
+    "lastFeedbackAt": {
+      "kind": "date",
+      "default": null
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "formId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "templateFingerprint": 1
+      },
+      {}
+    ],
+    [
+      {
+        "orgId": 1,
+        "formId": 1,
+        "templateFingerprint": 1,
+        "fieldId": 1,
+        "evidenceKey": 1,
+        "valuePattern": 1
+      },
+      {
+        "unique": true,
+        "name": "pdf_autofill_learning_identity"
+      }
+    ]
+  ]
+}

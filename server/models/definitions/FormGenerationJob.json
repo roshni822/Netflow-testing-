@@ -1,0 +1,552 @@
+{
+  "name": "FormGenerationJob",
+  "collection": "formgenerationjobs",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization",
+      "required": true
+    },
+    "requesterId": {
+      "kind": "id",
+      "ref": "User",
+      "required": true
+    },
+    "languageMode": {
+      "kind": "string",
+      "enum": [
+        "english",
+        "english_hindi",
+        "hindi"
+      ],
+      "default": "english_hindi"
+    },
+    "sourceFile.filename": {
+      "kind": "string",
+      "required": true
+    },
+    "sourceFile.mimetype": {
+      "kind": "string",
+      "required": true
+    },
+    "sourceFile.size": {
+      "kind": "number",
+      "required": true
+    },
+    "sourceFile.storage": {
+      "kind": "string",
+      "required": true,
+      "enum": [
+        "local",
+        "dms",
+        "s3"
+      ]
+    },
+    "sourceFile.path": {
+      "kind": "string",
+      "default": null
+    },
+    "sourceFile.storedFilename": {
+      "kind": "string",
+      "default": null
+    },
+    "sourceFile.dmsDocId": {
+      "kind": "string",
+      "default": null
+    },
+    "sourceFile.s3Key": {
+      "kind": "string",
+      "default": null
+    },
+    "status": {
+      "kind": "string",
+      "enum": [
+        "queued",
+        "security_scan",
+        "inspecting",
+        "extracting_text",
+        "ocr_processing",
+        "generating_schema",
+        "validating",
+        "ready",
+        "failed",
+        "cancelled"
+      ],
+      "default": "queued"
+    },
+    "stage": {
+      "kind": "string",
+      "default": "Queued for processing"
+    },
+    "progress": {
+      "kind": "number",
+      "min": 0,
+      "max": 100,
+      "default": 0
+    },
+    "attempts": {
+      "kind": "number",
+      "default": 0
+    },
+    "claimedAt": {
+      "kind": "date",
+      "default": null
+    },
+    "retryAt": {
+      "kind": "date",
+      "default": null
+    },
+    "pageCount": {
+      "kind": "number",
+      "default": 0
+    },
+    "pageMeta": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "json"
+      }
+    },
+    "lines": {
+      "kind": "array",
+      "hidden": true,
+      "default": [],
+      "items": {
+        "kind": "json"
+      }
+    },
+    "generatedTitle": {
+      "kind": "string",
+      "default": ""
+    },
+    "generatedDescription": {
+      "kind": "string",
+      "default": ""
+    },
+    "documentType": {
+      "kind": "string",
+      "default": ""
+    },
+    "criticStatus": {
+      "kind": "string",
+      "enum": [
+        "validated",
+        "unavailable"
+      ],
+      "default": "validated"
+    },
+    "candidates": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "scoreVersion": {
+            "kind": "number",
+            "default": 1
+          },
+          "candidateId": {
+            "kind": "string",
+            "required": true
+          },
+          "field": {
+            "kind": "json",
+            "required": true
+          },
+          "sourceLabel": {
+            "kind": "string",
+            "default": ""
+          },
+          "context": {
+            "kind": "string",
+            "default": ""
+          },
+          "sourceLineIds": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "string"
+            }
+          },
+          "necessity": {
+            "kind": "string",
+            "enum": [
+              "core",
+              "optional",
+              "conditional"
+            ],
+            "default": "optional"
+          },
+          "decisionReason": {
+            "kind": "string",
+            "default": ""
+          },
+          "requiredReason": {
+            "kind": "string",
+            "default": ""
+          },
+          "generatorConfidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": 0
+          },
+          "criticConfidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": 0
+          },
+          "criticStatus": {
+            "kind": "string",
+            "enum": [
+              "validated",
+              "unavailable"
+            ],
+            "default": "validated"
+          },
+          "validationReason": {
+            "kind": "string",
+            "default": ""
+          },
+          "sourceConfidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": null
+          },
+          "sourceMethods": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "string",
+              "enum": [
+                "digital",
+                "ocr",
+                "unknown"
+              ]
+            }
+          },
+          "ocrConfidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": null
+          },
+          "labelGroundingConfidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": null
+          },
+          "labelGroundingMethod": {
+            "kind": "string",
+            "enum": [
+              "text_match",
+              "document_context"
+            ],
+            "default": "text_match"
+          },
+          "optionGroundingConfidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "default": null
+          },
+          "confidence": {
+            "kind": "number",
+            "min": 0,
+            "max": 100,
+            "required": true
+          },
+          "confidenceTier": {
+            "kind": "string",
+            "required": true,
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "includedByDefault": {
+            "kind": "boolean",
+            "default": false
+          },
+          "reviewWarnings": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "string"
+            }
+          },
+          "sourceRegions": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "object",
+              "fields": {
+                "lineId": {
+                  "kind": "string",
+                  "required": true
+                },
+                "page": {
+                  "kind": "number",
+                  "required": true
+                },
+                "x": {
+                  "kind": "number",
+                  "required": true
+                },
+                "y": {
+                  "kind": "number",
+                  "required": true
+                },
+                "width": {
+                  "kind": "number",
+                  "required": true
+                },
+                "height": {
+                  "kind": "number",
+                  "required": true
+                },
+                "confidence": {
+                  "kind": "number",
+                  "default": 0
+                },
+                "source": {
+                  "kind": "string",
+                  "enum": [
+                    "digital",
+                    "ocr",
+                    "unknown"
+                  ],
+                  "default": "unknown"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "confidenceSummary.high": {
+      "kind": "number",
+      "default": 0
+    },
+    "confidenceSummary.medium": {
+      "kind": "number",
+      "default": 0
+    },
+    "confidenceSummary.low": {
+      "kind": "number",
+      "default": 0
+    },
+    "qualitySummary": {
+      "kind": "object",
+      "default": null,
+      "fields": {
+        "version": {
+          "kind": "number",
+          "required": true
+        },
+        "digital.pageCount": {
+          "kind": "number"
+        },
+        "digital.lineCount": {
+          "kind": "number"
+        },
+        "ocr.pageCount": {
+          "kind": "number"
+        },
+        "ocr.lineCount": {
+          "kind": "number"
+        },
+        "ocr.confidence": {
+          "kind": "number",
+          "min": 0,
+          "max": 100,
+          "default": null
+        },
+        "grounding": {
+          "kind": "object",
+          "fields": {
+            "confidence": {
+              "kind": "number",
+              "min": 0,
+              "max": 100,
+              "default": null
+            },
+            "scoredFields": {
+              "kind": "number",
+              "default": 0
+            },
+            "totalFields": {
+              "kind": "number",
+              "default": 0
+            },
+            "unavailableFields": {
+              "kind": "number",
+              "default": 0
+            }
+          }
+        },
+        "validation": {
+          "kind": "object",
+          "fields": {
+            "confidence": {
+              "kind": "number",
+              "min": 0,
+              "max": 100,
+              "default": null
+            },
+            "scoredFields": {
+              "kind": "number",
+              "default": 0
+            },
+            "totalFields": {
+              "kind": "number",
+              "default": 0
+            },
+            "unavailableFields": {
+              "kind": "number",
+              "default": 0
+            }
+          }
+        }
+      }
+    },
+    "processingVersion": {
+      "kind": "number",
+      "default": 1
+    },
+    "maxFields": {
+      "kind": "number",
+      "default": 25
+    },
+    "limitReached": {
+      "kind": "boolean",
+      "default": false
+    },
+    "coverage": {
+      "kind": "object",
+      "default": null,
+      "fields": {
+        "status": {
+          "kind": "string",
+          "enum": [
+            "complete",
+            "partial"
+          ]
+        },
+        "totalSourceLines": {
+          "kind": "number"
+        },
+        "unresolvedCount": {
+          "kind": "number"
+        },
+        "unreadablePageCount": {
+          "kind": "number"
+        },
+        "lowConfidenceOcrPageCount": {
+          "kind": "number"
+        },
+        "recoveryAttempts": {
+          "kind": "number"
+        },
+        "recoveryFailures": {
+          "kind": "number"
+        },
+        "validationAttempts": {
+          "kind": "number"
+        },
+        "validationFailures": {
+          "kind": "number"
+        },
+        "validationSkipped": {
+          "kind": "number"
+        },
+        "recoverySkipped": {
+          "kind": "number"
+        },
+        "maxRequestCharacters": {
+          "kind": "number"
+        },
+        "failureReasons": {
+          "kind": "array",
+          "default": [],
+          "items": {
+            "kind": "string"
+          }
+        }
+      }
+    },
+    "truncated": {
+      "kind": "boolean",
+      "default": false
+    },
+    "detectedFieldCount": {
+      "kind": "number",
+      "default": 0
+    },
+    "errorCode": {
+      "kind": "string",
+      "default": null
+    },
+    "errorDetail": {
+      "kind": "string",
+      "hidden": true,
+      "default": null
+    },
+    "expiresAt": {
+      "kind": "date",
+      "required": true
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "requesterId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "status": 1
+      },
+      {}
+    ],
+    [
+      {
+        "expiresAt": 1
+      },
+      {}
+    ],
+    [
+      {
+        "status": 1,
+        "retryAt": 1,
+        "createdAt": 1
+      },
+      {}
+    ]
+  ]
+}

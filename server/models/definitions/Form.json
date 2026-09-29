@@ -1,0 +1,219 @@
+{
+  "name": "Form",
+  "collection": "forms",
+  "timestamps": true,
+  "fields": {
+    "orgId": {
+      "kind": "id",
+      "ref": "Organization"
+    },
+    "title": {
+      "kind": "string",
+      "required": true
+    },
+    "description": {
+      "kind": "string"
+    },
+    "fields": {
+      "kind": "array",
+      "default": [],
+      "items": {
+        "kind": "object",
+        "fields": {
+          "id": {
+            "kind": "string",
+            "required": true
+          },
+          "type": {
+            "kind": "string",
+            "required": true,
+            "enum": [
+              "number",
+              "text",
+              "dropdown",
+              "date",
+              "file",
+              "checkbox",
+              "signature",
+              "repeater",
+              "textarea",
+              "radio",
+              "grid",
+              "camera",
+              "heading"
+            ]
+          },
+          "label": {
+            "kind": "string",
+            "required": true
+          },
+          "placeholder": {
+            "kind": "string"
+          },
+          "required": {
+            "kind": "boolean",
+            "default": false
+          },
+          "options": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "string"
+            }
+          },
+          "layout": {
+            "kind": "string",
+            "enum": [
+              "vertical",
+              "horizontal"
+            ],
+            "default": "vertical"
+          },
+          "includeTime": {
+            "kind": "boolean",
+            "default": false
+          },
+          "columns": {
+            "kind": "array",
+            "default": [],
+            "items": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "string"
+                },
+                "label": {
+                  "kind": "string"
+                },
+                "type": {
+                  "kind": "string"
+                },
+                "options": {
+                  "kind": "array",
+                  "default": [],
+                  "items": {
+                    "kind": "string"
+                  }
+                },
+                "_id": {
+                  "kind": "id",
+                  "defaultFactory": "id"
+                }
+              }
+            }
+          },
+          "conditionalLogic.enabled": {
+            "kind": "boolean",
+            "default": false
+          },
+          "conditionalLogic.dependsOn": {
+            "kind": "string"
+          },
+          "conditionalLogic.operator": {
+            "kind": "string",
+            "enum": [
+              "eq",
+              "neq",
+              "contains",
+              "nonempty"
+            ],
+            "default": "eq"
+          },
+          "conditionalLogic.showWhen": {
+            "kind": "string"
+          },
+          "validation.minLength": {
+            "kind": "number"
+          },
+          "validation.maxLength": {
+            "kind": "number"
+          },
+          "validation.min": {
+            "kind": "number"
+          },
+          "validation.max": {
+            "kind": "number"
+          },
+          "validation.pattern": {
+            "kind": "string"
+          },
+          "validation.patternLabel": {
+            "kind": "string"
+          },
+          "referenceUser": {
+            "kind": "boolean",
+            "default": false
+          },
+          "page": {
+            "kind": "number",
+            "default": 1
+          },
+          "_id": {
+            "kind": "id",
+            "defaultFactory": "id"
+          }
+        }
+      }
+    },
+    "status": {
+      "kind": "string",
+      "enum": [
+        "draft",
+        "published",
+        "archived"
+      ],
+      "default": "draft"
+    },
+    "createdBy": {
+      "kind": "id",
+      "ref": "User",
+      "required": true
+    },
+    "department": {
+      "kind": "string"
+    },
+    "version": {
+      "kind": "number",
+      "default": 1
+    },
+    "public.enabled": {
+      "kind": "boolean",
+      "default": false
+    },
+    "public.token": {
+      "kind": "string",
+      "default": null
+    },
+    "autoFill.enabled": {
+      "kind": "boolean",
+      "default": false
+    },
+    "_id": {
+      "kind": "id",
+      "defaultFactory": "id"
+    },
+    "createdAt": {
+      "kind": "date"
+    },
+    "updatedAt": {
+      "kind": "date"
+    },
+    "__v": {
+      "kind": "number"
+    }
+  },
+  "indexes": [
+    [
+      {
+        "orgId": 1
+      },
+      {}
+    ],
+    [
+      {
+        "public.token": 1
+      },
+      {}
+    ]
+  ]
+}

@@ -1,0 +1,93 @@
+<<<<<<< HEAD
+node_modules
+dist
+.env
+package-lock.json       
+frontend\.rg.txt          
+frontend\.rg2.txt         
+frontend\.rg3.txt         
+frontend\.rg4.txt         
+frontend\.rg5.txt 
+
+        # ---------------------------------------------------------------------------
+# FlowSphere — root .gitignore (covers frontend, server, docs, tools)
+# ---------------------------------------------------------------------------
+
+# Dependencies
+node_modules/
+**/node_modules/
+.pnp
+.pnp.js
+
+# Build output / bundles
+dist/
+build/
+**/dist/
+**/build/
+.vite/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Uploaded files (user attachments)
+server/uploads/
+uploads/
+
+# Database backups (real data — never commit)
+server/backups/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Caches & coverage
+coverage/
+.nyc_output/
+.cache/
+.eslintcache
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Temp / scratch files
+*.tmp
+_tmp_*
+
+# Local test-run scratch (captured suite output)
+server/tests/.*.out
+
+# VitePress
+.vitepress/dist
+.vitepress/cache
+
+**/node_modules/
+**/dist/
+**/build/
+
+**/.env
+**/.env.*
+!**/.env.example
+
+*.log
+server/uploads/
+server/backups/
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+=======
+.agents
+>>>>>>> 4c10fcdf7412b29c5deb43468c0507f158e7454b
